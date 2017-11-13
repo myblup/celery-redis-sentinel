@@ -31,7 +31,8 @@ class RedisSentinelBackend(RedisBackend):
         super(RedisSentinelBackend, self).__init__(*args, **kwargs)
 
         _get = self.app.conf.get
-        self.transport_options = transport_options or _get('CELERY_RESULT_BACKEND_TRANSPORT_OPTIONS') or {}
+        #self.transport_options = transport_options or _get('CELERY_RESULT_BACKEND_TRANSPORT_OPTIONS') or {}
+        self.transport_options = _get('CELERY_RESULT_BACKEND_TRANSPORT_OPTIONS') or {}
         self.sentinels = self.transport_options['sentinels']
         self.service_name = self.transport_options['service_name']
         self.socket_timeout = self.transport_options.get('socket_timeout', 0.1)
